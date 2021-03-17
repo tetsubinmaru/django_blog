@@ -26,3 +26,14 @@ def delete(request, blog_id):
     blog = get_object_or_404(Blog, id=blog_id)
     blog.delete()
     return redirect('blogs:index')
+
+def edit(request, blog_id):
+    blog = get_object_or_404(Blog, id=blog_id)
+    if request.method == "POST":
+        form = BlogForm(request.POST, instance=blog)
+        if form.is_valid():
+            form.save()
+            return redirect('blogs:detail', blog_id)
+    else:
+        form = BlogForm(instance=blog)
+    return render(request, 'blogs/edit.html', {'form': form, 'blog': blog})

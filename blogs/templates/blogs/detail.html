@@ -8,6 +8,9 @@
     <div style="width: 70%;margin: 0px auto;">
         <div style="margin: 60px 20px;">{{ blog.text }}</div>
         <div style="text-align: center; margin-top: 50px;">
+            <a href="{% url 'blogs:edit' blog.id %}">
+                <button class="btn">編集</button>
+            </a>
             <form method="POST" action="{% url 'blogs:delete' blog.id %}">
                 {% csrf_token %}
                 <button class="btn" type="submit" onclick='return confirm("本当に削除しますか？");'>
